@@ -22,18 +22,17 @@ Input:
 Output: 3
 
 */
-
-const dfs = (grid, i, j) => {
-  if (i < 0 || j < 0 || !grid[i][j].length || grid[i][j] === '0') {
-    return 0;
+const check = (grid, i, j) => {
+  if (i < grid.length && j < grid[0].length && i >= 0 && j >= 0 && grid[i][j] === '1') {
+    grid[i][j] = '0';
+    check(grid, i, j - 1);
+    check(grid, i, j + 1);
+    check(grid, i - 1, j);
+    check(grid, i + 1, j);
+    return 1;
   }
 
-  grid[i][j] = '0';
-  dfs(grid, i - 1, j);
-  dfs(grid, i + 1, j);
-  dfs(grid, i, j - 1);
-  dfs(grid, i, j + 1);
-  return 1;
+  return 0;
 };
 
 var numIslands = function (grid) {
@@ -41,14 +40,12 @@ var numIslands = function (grid) {
     return 0;
   }
 
-  let n = 0;
-  for (var i = 0; i < grid.length; i++) {
-    for (var j = 0; j < grid[i].length; j++) {
-      if (grid[i][j] === '1') {
-        n += dfs(grid, i, j);
-      }
+  let islands = 0;
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[0].length; j++) {
+      islands += check(grid, i, j);
     }
   }
 
-  return n;
+  return islands;
 };
