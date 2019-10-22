@@ -5,10 +5,6 @@
  *     this.left = this.right = null;
  * }
  */
-/**
- * @param {TreeNode} root
- * @return {number}
- */
 var countNodes = function (root) {
   let queue = [root];
   let vals = [];
