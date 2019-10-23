@@ -65,3 +65,16 @@ var romanToInt = function (s) {
 
   return sum;
 };
+
+var romanToInt = function (s) {
+  let sum = 0;
+  for (let i = s.length - 1; i >= 0; i--) {
+    if (map[s[i]] > map[s[i - 1]]) {
+      sum += map[s[i]] - map[s[i - 1]];
+      i--;
+    } else {
+      sum += map[s[i]];
+    }
+  }
+  return sum;
+};
